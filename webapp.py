@@ -27,7 +27,8 @@ start_page = '''<!DOCTYPE HTML>
     	<p>Hall or House Name? <input type="text" name="building" /></p>
     	<p>Number of Desired Room? <input type="text" name="room_number" /></p>
     	<p>Desired Occupancy? <input type="text" name="occupancy" /></p>
-    	<p>Desired Environment? <input type="text" name="environment" /></p>
+    	<p>Desired Environment? <input type="radio" name="environment" value"subfree">Sub-Free 
+           <input type="radio" name="environment" value"quiet">Quiet</p>
     	<p><input type="submit" value="FIND ME A ROOM!!" /></p>
 
     <h2> What's the best room I can find near my favorite location on campus? </h2>
