@@ -10,11 +10,11 @@ form = cgi.FieldStorage()
 start_page = '''<!DOCTYPE HTML>
 <html>
 <head>
-    <title> Room Finder Extraordinaire -- Start Page </title>
+    <title>Room Finder Extraordinaire -- Start Page</title>
 </head>
 
 <body>
-	<h1> Room Finder Extraordinaire </h1>
+	<h1>Room Finder Extraordinaire</h1>
     <h2> Which Room can I get? </h2>
     <form action="webapp.py" method="get">
         <p>Room Draw Number? <input type="text" name="draw_number" /></p>
