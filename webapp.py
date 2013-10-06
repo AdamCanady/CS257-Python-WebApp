@@ -75,10 +75,10 @@ try:
                 </select>
             </p>
             <p>Number of Desired Room? <input type="text" name="room_number" /></p>
-            <p>Desired Occupancy? <input type="radio" name="environment" value"single"> Single
-                <input type="radio" name="environment" value"double"> Double
-                <input type="radio" name="environment" value"triple"> Triple
-                <input type="radio" name="environment" value"quad_plus"> Quad+</p>
+            <p>Desired Occupancy? <input type="radio" name="capacity" value"single"> Single
+                <input type="radio" name="capacity" value"double"> Double
+                <input type="radio" name="capacity" value"triple"> Triple
+                <input type="radio" name="capacity" value"quad_plus"> Quad+</p>
             <p>Desired Environment? <input type="radio" name="environment" value"subfree"> Sub-Free
                <input type="radio" name="environment" value"quiet"> Quiet
                <input type="radio" name="environment" value"single_gender"> Single Gender
@@ -88,37 +88,39 @@ try:
         <h2>What's the best room I can find near my favorite location on campus?</h2>
         <form action="webapp.py" method="get">
             <p>Room Draw Number? <input type="text" name="draw_number" /></p>
-            <p>Favorite Location? <select name="fav_locations">
-                                    <option value="">Select A Location</option>
-                                    <option value="sayles">Sayles</option>
-                                    <option value="willis">Willis</option>
-                                    <option value="hulings">Hulings</option>
-                                    <option value="olin">Olin</option>
-                                    <option value="mudd">Mudd</option>
-                                    <option value="cmc">CMC</option>
-                                    <option value="boliou">Boliou</option>
-                                    <option value="laird">Laird</option>
-                                    <option value="gould">Gould</option>
-                                    <option value="leighton">Leighton</option>
-                                    <option value="west_athletic_complex">West Athletic Complex</option>
-                                    <option value="recreation_center">Recreation Center</option>
-                                    <option value="downtown_northfield">Downtown Northfield</option>
-                                    <option value="st_olaf">St Olaf</option>
-                                    <option value="bald_spot">Bald Spot</option>
-                                    <option value="weitz">Weitz</option>
-                                    <option value="mini_bald_spot">Mini Bald Spot</option>
-                                    <option value="upper_arb">Upper Arb</option>
-                                    <option value="lower_arb">Lower Arb</option>
-                                    <option value="cowling">Cowling</option>
-                                    <option value="bell_field">Bell Field</option>
-                                    <option value="ldc">LDC</option>
-                                    <option value="goodsell">Goodsell</option>
-                                    <option value="concert_hall">Concert Hall</option>
-                                    <option value="music_hall">Music Hall</option>
-                                    <option value="scoville">Scoville</option>
-                                    <option value="facilities">Facilities</option>
-                                    <option value="tunnels">Tunnels</option>
-                                    </p>
+            <p>Favorite Location?
+                <select name="fav_locations">
+                    <option value="">Select A Location</option>
+                    <option value="sayles">Sayles</option>
+                    <option value="willis">Willis</option>
+                    <option value="hulings">Hulings</option>
+                    <option value="olin">Olin</option>
+                    <option value="mudd">Mudd</option>
+                    <option value="cmc">CMC</option>
+                    <option value="boliou">Boliou</option>
+                    <option value="laird">Laird</option>
+                    <option value="gould">Gould</option>
+                    <option value="leighton">Leighton</option>
+                    <option value="west_athletic_complex">West Athletic Complex</option>
+                    <option value="recreation_center">Recreation Center</option>
+                    <option value="downtown_northfield">Downtown Northfield</option>
+                    <option value="st_olaf">St Olaf</option>
+                    <option value="bald_spot">Bald Spot</option>
+                    <option value="weitz">Weitz</option>
+                    <option value="mini_bald_spot">Mini Bald Spot</option>
+                    <option value="upper_arb">Upper Arb</option>
+                    <option value="lower_arb">Lower Arb</option>
+                    <option value="cowling">Cowling</option>
+                    <option value="bell_field">Bell Field</option>
+                    <option value="ldc">LDC</option>
+                    <option value="goodsell">Goodsell</option>
+                    <option value="concert_hall">Concert Hall</option>
+                    <option value="music_hall">Music Hall</option>
+                    <option value="scoville">Scoville</option>
+                    <option value="facilities">Facilities</option>
+                    <option value="tunnels">Tunnels</option>
+                </select>
+            </p>
             <p><input type="submit" value="FIND ME A ROOM!!" /></p>
         </form>
 
