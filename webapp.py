@@ -89,6 +89,7 @@ try:
         <form action="webapp.py" method="get">
             <p>Room Draw Number? <input type="text" name="draw_number" /></p>
             <p>Favorite Location? <select name="fav_locations">
+                                    <option value="">Select A Location</option>
                                     <option value="sayles">Sayles</option>
                                     <option value="willis">Willis</option>
                                     <option value="hulings">Hulings</option>
