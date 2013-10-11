@@ -3,8 +3,13 @@
 CS 257 Python Web App, Fall 2013, Jeff Ondich
 Jiatao Cheng, Erin Wilson, and Adam Canady
 
+This module defines how to connect to our datasource and various associated
+functionalities like getting metrics from various dimensions.
+
 Some of the following code is from Jeff Ondich's psycopg2-demo.py
 '''
+
+import psycopg2
 
 class DataSource:
     def __init__(self):
@@ -14,18 +19,24 @@ class DataSource:
         self.user = 'canadya'
         self.password = 'star925propane'
 
+        self.connect()
+
+    def connect(self):
         # Login to the database
         try:
-            self.connection = psycopg2.connect(database=database, user=user, password=password)
-            self.cursor = connection.cursor()
+            self.connection = psycopg2.connect(database=self.database, user=self.user, password=self.password)
+            self.cursor = self.connection.cursor()
         except Exception, e:
             raise e
 
-    def get_rooms_by_number(self, number):
-        query = 'SELECT draw_number, building, room_number, occupancy FROM roomdraw WHERE draw_number > %s' % user_draw_number
-        cursor.execute(query)
+    def close(self):
+        self.connection.close()
 
-        return cursor.fetchall()
+    def get_rooms_by_number(self, number):
+        query = 'SELECT draw_number, building, room_number, occupancy FROM roomdraw WHERE draw_number > %s' % number
+        self.cursor.execute(query)
+
+        return self.cursor.fetchall()
 
     def get_rooms_by_occupancy(self, occupancy):
         '''Takes an integer and returns a list of rooms matching that occupancy'''
@@ -74,4 +85,5 @@ class DataSource:
         return rooms
 
 if __name__ == "__main__":
-    DataSource()
+    db = DataSource()
+    print db.get_rooms_by_number('1001')

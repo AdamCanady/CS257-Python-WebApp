@@ -7,11 +7,10 @@ This file defines the HTML used in this project.
 '''
 
 class Templates():
-
     def __init__(self):
         pass
 
-    def get_results_page(content):
+    def get_results_page(self, content):
         results_page = '''
         <html>
             <head>
@@ -22,11 +21,10 @@ class Templates():
                 %s
             </body>
         </html>
-        ''' % content
+        ''' % str(content)
         return results_page
 
-
-    def get_start_page():
+    def get_start_page(self):
         start_page = '''<!DOCTYPE HTML>
             <html>
             <head>
@@ -155,3 +153,8 @@ class Templates():
             '''
         return start_page
 
+
+if __name__ == "__main__":
+    templates = Templates()
+    templates.get_start_page()
+    templates.get_results_page(1)
