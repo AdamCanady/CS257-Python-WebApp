@@ -1,0 +1,45 @@
+#content {
+	margin: 30px auto;
+	border: 1px solid #555;
+	width: 960px;
+	padding: 30px;
+	font-family: helvetica, sans-serif;
+	background-color: #FFF;
+}
+h2 {
+	border-bottom: 3px solid #000;
+}
+
+p {
+	margin-left:40px;
+}
+
+body {
+	background-color: #F6F4F0;
+}
+
+#submit {
+	background-color: #E8E8E8;
+	color: #404040;
+	border: solid;
+	border-width: 0px;
+	font-size: 10;
+	height: 25px;
+	width: 115px;
+	font-weight: bold;
+	width: 100px;
+	padding-right:15px;
+	margin-left: 240px;
+}
+	
+label {
+	width: 165px;
+	text-align: right;
+	float:left;
+	padding-right:15px;
+}
+
+#text_box{
+	width: 160px;
+}
+
