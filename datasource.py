@@ -119,6 +119,7 @@ class DataSource:
         else:
             raise Exception('Invalid Room Draw Number') # Raised if number not between 1000 and 4000
 
+    
     # def get_rooms_by_number(self, number):
     #     self.query = 'SELECT draw_number, building, room_number, occupancy FROM roomdraw WHERE draw_number > %s' % number
     #     self.cursor.execute(self.query)
