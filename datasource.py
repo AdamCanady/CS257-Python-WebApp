@@ -33,60 +33,62 @@ class DataSource:
         self.connection.close()
 
     def get_rooms_by_preference(self, user_input_building = "", user_input_occupancy = 0, user_input_environment = ""):
-        query = """SELECT *
+        self.query = """SELECT *
                    FROM rooms
-                   LEFT JOIN building ON rooms.building_id = buildings.id \n"""
+                   LEFT JOIN buildings ON rooms.building_id = buildings.id \n"""
 
         if user_input_occupancy > 0:
-            if "WHERE" in query:
-                query += " AND "
+            if "WHERE" in self.query:
+                self.query += " AND "
             else:
-                query += " WHERE "
-            query += "occupancy = %d" % user_input_occupancy
+                self.query += " WHERE "
+            self.query += "occupancy = %d" % user_input_occupancy
 
         if user_input_environment == "sub_free":
-            if "WHERE" in query:
-                query += " AND "
+            if "WHERE" in self.query:
+                self.query += " AND "
             else:
-                query += " WHERE "
-            query += "sub_free = 't'"
+                self.query += " WHERE "
+            self.query += "sub_free = 't'"
 
         if user_input_environment == "quiet":
-            if "WHERE" in query:
-                query += " AND "
+            if "WHERE" in self.query:
+                self.query += " AND "
             else:
-                query += " WHERE "
-            query += "quiet = 't'"
+                self.query += " WHERE "
+            self.query += "quiet = 't'"
 
         if user_input_building:
-            if "WHERE" in query:
-                query += " AND "
+            if "WHERE" in self.query:
+                self.query += " AND "
             else:
-                query += " WHERE "
-            query += "building = %s" % user_input_building
+                self.query += " WHERE "
+            self.query += "building = \'%s\'" % user_input_building
 
-        self.cursor.execute(query)
+        self.query += ";"
+
+        self.cursor.execute(self.query)
 
         return self.cursor.fetchall()
 
     def get_rooms_in_range(self, upper, lower):
         ''' Returns a list of rooms in the format:
                 [building, room, occupancy, sub_free, quiet] '''
-        query = """SELECT building, room, occupancy, sub_free, quiet
+        self.query = """SELECT building, room, occupancy, sub_free, quiet
                    FROM rooms
-                   LEFT JOIN building ON rooms.building_id = buildings.id
+                   LEFT JOIN buildings ON rooms.building_id = buildings.id
                    WHERE avg_draw_number > %d and avg_draw_number < %d;""" % (lower, upper)
-        self.cursor.execute(query)
+        self.cursor.execute(self.query)
 
         return self.cursor.fetchall()
 
     def specific_room_possibility(self, converted_draw_number, room, building):
         ''' Returns one of ["Stretch", "Target", "Safety", "Draw Not Available"] '''
-        query = """SELECT avg_draw_number
+        self.query = """SELECT avg_draw_number
                    FROM rooms
-                   LEFT JOIN building ON rooms.building_id = buildings.id
-                   WHERE building = %s and room = %s;""" % (building, room)
-        self.cursor.execute(query)
+                   LEFT JOIN buildings ON rooms.building_id = buildings.id
+                   WHERE building = \'%s\' and room = %s;""" % (building, room)
+        self.cursor.execute(self.query)
         result = self.cursor.fetchall()
 
         upper_target_bound = converted_draw_number + 30
@@ -106,10 +108,10 @@ class DataSource:
             return "Draw Not Available"
 
     def convert_number(self, user_input):
-        query = """SELECT db_num
+        self.query = """SELECT db_num
                    FROM number_map
                    WHERE roomdraw_num = %d;""" % (user_input)
-        self.cursor.execute(query)
+        self.cursor.execute(self.query)
         result = self.cursor.fetchall()
 
         if len(result) > 0:
@@ -118,12 +120,22 @@ class DataSource:
             raise Exception('Invalid Room Draw Number') # Raised if number not between 1000 and 4000
 
     # def get_rooms_by_number(self, number):
-    #     query = 'SELECT draw_number, building, room_number, occupancy FROM roomdraw WHERE draw_number > %s' % number
-    #     self.cursor.execute(query)
+    #     self.query = 'SELECT draw_number, building, room_number, occupancy FROM roomdraw WHERE draw_number > %s' % number
+    #     self.cursor.execute(self.query)
 
     #     return self.cursor.fetchall()
 
-
+''' Tests '''
 if __name__ == "__main__":
     db = DataSource()
-    print db.get_rooms_by_number('1001')
+    print "Specific Room Possibility:"
+    print db.specific_room_possibility(182, 213, "Cassat Hall")
+    print db.query
+    print
+    print "Get Rooms By Preference:"
+    print db.get_rooms_by_preference(user_input_building = "Cassat Hall", user_input_occupancy = 1, user_input_environment = "sub_free")
+    print db.query
+    print
+    print "Get Rooms In Range:"
+    print db.get_rooms_in_range(462, 402)
+    print db.query
