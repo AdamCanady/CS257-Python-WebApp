@@ -29,10 +29,18 @@ for line in csv.reader(open('rooms.csv','rU')):
     room = line[2]
     occupancy = line[3]
     sub_free = line[4]
+    if sub_free == 1:
+        sub_free = "yes"
+    else:
+        sub_free = "no"
     quiet = line[5]
+    if quiet == 1:
+        quiet = "yes"
+    else:
+        quiet = "no"
 
     insert_statement = "INSERT INTO rooms (building_id, avg_draw_number, room, occupancy, sub_free, quiet) " + \
-                        "VALUES (%d, %d, %d, %d, %d, %d);\n" \
+                        "VALUES (%d, %d, %d, %d, '%s', '%s');\n" \
                         % (building_id, avg_draw_number, room, occupancy, sub_free, quiet)
 
     rooms_sql.write(insert_statement)
@@ -45,8 +53,8 @@ buildings_sql.write("DROP TABLE IF EXISTS buildings;\n")
 buildings_sql.write("""CREATE TABLE buildings (
   id int,
   building text,
-  geo_lat float,
-  geo_long float
+  geo_lat numeric,
+  geo_long numeric
 );\n\n""")
 
 headers = True
@@ -59,7 +67,7 @@ for line in csv.reader(open('buildings.csv','rU')):
     geo_long = float(line[3])
 
     insert_statement = "INSERT INTO buildings (id, building, geo_lat, geo_long) " + \
-                        "VALUES (%d, %s, %f, %f);\n" \
+                        "VALUES (%d, '%s', %f, %f);\n" \
                         % (id, building, geo_lat, geo_long)
 
     buildings_sql.write(insert_statement)

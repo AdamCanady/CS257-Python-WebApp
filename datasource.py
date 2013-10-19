@@ -32,57 +32,97 @@ class DataSource:
     def close(self):
         self.connection.close()
 
-    def get_rooms_by_number(self, number):
-        query = 'SELECT draw_number, building, room_number, occupancy FROM roomdraw WHERE draw_number > %s' % number
+    def get_rooms_by_preference(self, user_input_building = "", user_input_occupancy = 0, user_input_environment = ""):
+        query = """SELECT *
+                   FROM rooms
+                   LEFT JOIN building ON rooms.building_id = buildings.id \n"""
+
+        if user_input_occupancy > 0:
+            if "WHERE" in query:
+                query += " AND "
+            else:
+                query += " WHERE "
+            query += "occupancy = %d" % user_input_occupancy
+
+        if user_input_environment == "sub_free":
+            if "WHERE" in query:
+                query += " AND "
+            else:
+                query += " WHERE "
+            query += "sub_free = 't'"
+
+        if user_input_environment == "quiet":
+            if "WHERE" in query:
+                query += " AND "
+            else:
+                query += " WHERE "
+            query += "quiet = 't'"
+
+        if user_input_building:
+            if "WHERE" in query:
+                query += " AND "
+            else:
+                query += " WHERE "
+            query += "building = %s" % user_input_building
+
         self.cursor.execute(query)
 
         return self.cursor.fetchall()
 
-    def get_rooms_by_occupancy(self, occupancy):
-        '''Takes an integer and returns a list of rooms matching that occupancy'''
+    def get_rooms_in_range(self, upper, lower):
+        ''' Returns a list of rooms in the format:
+                [building, room, occupancy, sub_free, quiet] '''
+        query = """SELECT building, room, occupancy, sub_free, quiet
+                   FROM rooms
+                   LEFT JOIN building ON rooms.building_id = buildings.id
+                   WHERE avg_draw_number > %d and avg_draw_number < %d;""" % (lower, upper)
+        self.cursor.execute(query)
 
-        rooms = []
+        return self.cursor.fetchall()
 
-        # Implementation soon...
+    def specific_room_possibility(self, converted_draw_number, room, building):
+        ''' Returns one of ["Stretch", "Target", "Safety", "Draw Not Available"] '''
+        query = """SELECT avg_draw_number
+                   FROM rooms
+                   LEFT JOIN building ON rooms.building_id = buildings.id
+                   WHERE building = %s and room = %s;""" % (building, room)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
 
-        return rooms
+        upper_target_bound = converted_draw_number + 30
+        lower_target_bound = converted_draw_number - 30
 
-    def get_list_of_available_rooms(self):
-        '''Returns a list of all of the rooms ResLife offers'''
+        if len(result) > 0:
+            avg_draw_number = result[0][0]
+            if avg_draw_number < lower_target_bound:
+                return "Stretch"
+            elif avg_draw_number >= lower_target_bound and avg_draw_number <= upper_target_bound:
+                return "Target"
+            elif avg_draw_number > upper_target_bound:
+                return "Safety"
+            else:
+                raise Exception('Number Not Available')
+        else:
+            return "Draw Not Available"
 
-        rooms = []
+    def convert_number(self, user_input):
+        query = """SELECT db_num
+                   FROM number_map
+                   WHERE roomdraw_num = %d;""" % (user_input)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
 
-        # Implementation soon...
+        if len(result) > 0:
+            return result[0][0]
+        else:
+            raise Exception('Invalid Room Draw Number') # Raised if number not between 1000 and 4000
 
-        return rooms
+    # def get_rooms_by_number(self, number):
+    #     query = 'SELECT draw_number, building, room_number, occupancy FROM roomdraw WHERE draw_number > %s' % number
+    #     self.cursor.execute(query)
 
-    def get_rooms_by_environment(self, type):
-        '''Takes an environment ('quiet','single_gender','subfree','interest_house') and
-            returns a list of matching rooms'''
+    #     return self.cursor.fetchall()
 
-        rooms = []
-
-        # Implementation soon...
-
-        return rooms
-
-    def get_rooms_near_location(self, location):
-        '''Takes a location string and finds rooms close to that location'''
-
-        rooms = []
-
-        # Implementation soon...
-
-        return rooms
-
-    def get_rooms_by_location(self, location):
-        '''Takes a location string and finds rooms in that hall/house'''
-
-        rooms = []
-
-        # Implementation soon...
-
-        return rooms
 
 if __name__ == "__main__":
     db = DataSource()
