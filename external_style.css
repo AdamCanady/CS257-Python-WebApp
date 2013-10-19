@@ -32,7 +32,7 @@ body {
 	margin-left: 240px;
 }
 	
-#label1{
+label {
 	width: 165px;
 	text-align: right;
 	float:left;
@@ -43,7 +43,7 @@ body {
 	width: 160px;
 }
 
-.required{
-	color: #FF0000;
-	padding-left: 5px;
+#radio{
+	width: 60px;
 }
+
