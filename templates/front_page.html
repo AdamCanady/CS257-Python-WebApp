@@ -7,7 +7,7 @@
     <body>
         <div id="content">
             <h1>Room Finder Extraordinaire</h1>
-            <div class="accordion">
+            <div class= "accordion">
                 <ul>
                     <li>
                         <h2>Which rooms are available?</h2>
@@ -16,7 +16,7 @@
                             <p><label for="fav_locations" id="label1">Hall/House:</label>
                                 <select name="building" class="text_box" required>
                                     <option value="">Select A Hall/House</option>
-                                    <option value="">No Preference</option>
+                                    <option value="no_preference">No Preference</option>
                                     <option value="">----Hall----</option>
                                     <option value="Burton Hall">Burton</option>
                                     <option value="Cassat Hall">Cassat</option>
@@ -71,7 +71,6 @@
                             <p><input type="submit" value="FIND ME A ROOM" id="submit" /></p>
                         </form>
                     </li>
-
                     <li>
                         <h2>Which rooms can I get?</h2>
                         <form action="index.py" method="get">
@@ -91,7 +90,6 @@
                             <p><label for="fav_locations" id="label1">Hall/House:</label>
                                 <select name="building" class="text_box" required>
                                     <option value="">Select A Hall/House</option>
-                                    <option value="">No Preference</option>
                                     <option value="">----Hall----</option>
                                     <option value="Burton Hall">Burton</option>
                                     <option value="Cassat Hall">Cassat</option>
@@ -141,7 +139,7 @@
                             </p>
                             <p><label for="environment" id="label1">Desired Environment:</label><input type="radio" name="environment" value"subfree" required> Sub-Free
                                    <input type="radio" name="environment" value="quiet" id="radio"> Quiet
-                                   <input type="radio" name="environment" value="" id="radio"> No preference
+                                   <input type="radio" name="environment" value="no_preference" id="radio"> No preference
                                    <span class="required">*</span>
                             </p>
 
@@ -155,7 +153,7 @@
                             <p><label for="fav_locations" id="label1">Hall/House:</label>
                                     <select name="building" class="text_box" required>
                                         <option value="">Select A Hall/House</option>
-                                        <option value="">No Preference</option>
+                                        <option value="no_preference">No Preference</option>
                                         <option value="">----Hall----</option>
                                         <option value="Burton Hall">Burton</option>
                                         <option value="Cassat Hall">Cassat</option>
@@ -203,7 +201,7 @@
                             <input type="hidden" name="form_type" value="best_room_near_location"/>
                             <p><label for="draw_number" id="label1">Room Draw Number:</label><input type="text" name="draw_number" placeholder = "ie. 1025, 2245, 3001" class="text_box" required/><span class="required">*</span></p>
                                 <p><label for="fav_locations" id="label1">Favorite Location:</label>
-                                    <select name="favorite_locations" class="text_box" required>
+                                    <select name="favorite_location" class="text_box" required>
                                         <option value="">Select a Location</option>
                                         <option value="Sayles">Sayles</option>
                                         <option value="Hulings">Hulings</option>

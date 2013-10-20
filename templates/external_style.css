@@ -14,7 +14,7 @@
 }
 
 h2 {
-	border-bottom: 3px solid #000;
+	border-bottom: 2px solid gray;
 }
 
 p {
@@ -25,6 +25,32 @@ body {
 	background-color: #F6F4F0;
 }
 
+table {
+    border:1px solid gray;
+    border-collapse: collapse;
+}
+
+td{
+    border:1px solid gray;  
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    padding-left: 15px;  
+}
+
+th{
+    border:1px solid gray;
+    background-color: #E8E8E8;
+    font-weight: bold;
+}
+
+tr.odd td{
+    background-color: white;
+}
+
+tr.even td{
+    background-color: #E8E8E8;
+}
 #submit {
 	color: #404040;
 	border: solid;
@@ -65,40 +91,44 @@ body {
 	padding-left: 5px;
 }
 
+
 /* accordian based off of code from: http://www.w3avenue.com/2010/04/02/cross-browser-pure-css3-vertical-accordion/; */
 
 .accordion>ul {
-    margin: 0;
-    padding: 0;
     margin-left: 100px;
+    padding: 0;
     list-style:none;
     width: 1000px;
 }
-
+ 
 .accordion>ul>li {
     display:block;
     overflow: hidden;
-    margin: 0px;
+    margin: 0;
     padding: 0;
-    height:40px;
+    list-style:none;
+    height:50px;
     width: 1000px;
-    background-color: #EAEAEB;
-    transition: height .50s;
+    border: 1px solid gray;
+ 
+    /* Decorative CSS */
+    background-color:#f0f0f0;
 }
-
-.accordion>ul>li>h2 {
+ 
+.accordion>ul>li>h3 {
     display:block;
     margin: 0;
-    padding:7px 10px 13px 10px;
+    padding:10px;
     height:19px;
-
-    border-top:#f0f0f0 1px solid;
+ 
+    /* Decorative CSS */
     font-family: Arial, Helvetica, sans-serif;
     text-decoration:none;
     text-transform:uppercase;
-    background: #BCBCBC;
+    color: #000;
+    background: #cccccc;
 }
-
+ 
 .accordion>ul>li>div {
     margin:0;
     overflow: auto;
@@ -108,13 +138,15 @@ body {
 
 .accordion>ul>li:hover {
     height: 280px;
-    transition: height .50s;
+    transition: .5s;
 }
-
+ 
 .accordion:hover>ul>li:hover>h3 {
-    background: white;
+    /* Decorative CSS */
+    color:#fff;
+    background: #000000;
 }
-
+ 
 .accordion>ul>li>h3:hover {
     cursor:pointer;
 }
