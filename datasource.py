@@ -39,9 +39,10 @@ class DataSource:
                                       user_input_occupancy = 0,
                                       user_input_environment = ""):
 
-        self.query = """SELECT avg_draw_number, building, room
+        self.query = """SELECT MIN(roomdraw_num), building, room
                    FROM rooms
-                   LEFT JOIN buildings ON rooms.building_id = buildings.id \n"""
+                   LEFT JOIN buildings ON rooms.building_id = buildings.id
+                   LEFT JOIN number_map ON avg_draw_number = number_map.db_num\n"""
 
         # The if/else clauses are used to determine if we need to create
         # a new WHERE block or add to an existing one
@@ -73,7 +74,7 @@ class DataSource:
                 self.query += " WHERE "
             self.query += "building = \'%s\'" % user_input_building
 
-        self.query += ";"
+        self.query += "GROUP BY building, room;"
 
         self.cursor.execute(self.query)
 
@@ -145,10 +146,12 @@ class DataSource:
             raise Exception('Something went wrong while determining your enemy\'s best room!')
 
         # Find rooms outside a 250m radius from enemy's target room
-        self.query = """SELECT avg_draw_number, building, room, occupancy, sub_free, quiet
+        self.query = """SELECT MIN(roomdraw_num), building, room, occupancy, sub_free, quiet, avg_draw_number
                    FROM rooms
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
-                   WHERE sqrt(power((geo_lat - %s),2) + power((geo_long - %s),2))*79208 > 250;""" % (enemy_lat, enemy_long)
+                   LEFT JOIN number_map ON avg_draw_number = number_map.db_num
+                   WHERE sqrt(power((geo_lat - %s),2) + power((geo_long - %s),2))*79208 > 250
+                   GROUP BY building, room;""" % (enemy_lat, enemy_long)
         self.cursor.execute(self.query)
 
         results = self.cursor.fetchall()
@@ -162,17 +165,17 @@ class DataSource:
         safety = []
 
         # Sort rooms into categories of likeliness
-        for room in results:
-            if room[0] < lower_target_bound:
-                stretch.append(room)
-
-            elif room[0] >= lower_target_bound and room[0] < upper_target_bound:
-                target.append(room)
-
-            elif room[0] >= upper_target_bound:
-                safety.append(room)
-        else:
+        if not results:
             Exception('No rooms found :(')
+        for room in results:
+            if room[6] < lower_target_bound:
+                stretch.append(room[:6])
+
+            elif room[6] >= lower_target_bound and room[6] < upper_target_bound:
+                target.append(room[:6])
+
+            elif room[6] >= upper_target_bound:
+                safety.append(room[:6])
 
         return enemy_target_room, stretch, target, safety
 
@@ -196,10 +199,12 @@ class DataSource:
             raise Exception('Something went wrong while determining your favorite location!')
 
         # Find room within 250m radius of favorite location
-        self.query = """SELECT avg_draw_number, building, room, occupancy, sub_free, quiet
+        self.query = """SELECT MIN(roomdraw_num), building, room, occupancy, sub_free, quiet, avg_draw_number
                    FROM rooms
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
-                   WHERE sqrt(power((geo_lat - %s),2) + power((geo_long - %s),2))*79208 < 250;""" % (fav_location_lat, fav_location_long)
+                   LEFT JOIN number_map ON avg_draw_number = number_map.db_num
+                   WHERE sqrt(power((geo_lat - %s),2) + power((geo_long - %s),2))*79208 < 250
+                   GROUP BY building, room;""" % (fav_location_lat, fav_location_long)
 
         self.cursor.execute(self.query)
 
@@ -215,14 +220,14 @@ class DataSource:
 
         # Sort rooms into categories of likeliness
         for room in results:
-            if room[0] < lower_target_bound:
-                stretch.append(room)
+            if room[6] < lower_target_bound:
+                stretch.append(room[:6])
 
-            elif room[0] >= lower_target_bound and room[0] < upper_target_bound:
-                target.append(room)
+            elif room[6] >= lower_target_bound and room[6] < upper_target_bound:
+                target.append(room[:6])
 
-            elif room[0] >= upper_target_bound:
-                safety.append(room)
+            elif room[6] >= upper_target_bound:
+                safety.append(room[:6])
         else:
             Exception('No rooms found :(')
 
@@ -232,10 +237,12 @@ class DataSource:
     def get_rooms_in_range(self, lower, upper):
         ''' Returns a list of rooms in the format:
                 [building, room, occupancy, sub_free, quiet] '''
-        self.query = """SELECT building, room, occupancy, sub_free, quiet
+        self.query = """SELECT MIN(roomdraw_num), building, room, occupancy, sub_free, quiet
                    FROM rooms
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
-                   WHERE avg_draw_number > %d and avg_draw_number < %d;""" % (lower, upper)
+                   LEFT JOIN number_map ON avg_draw_number = number_map.db_num
+                   WHERE avg_draw_number > %d and avg_draw_number < %d
+                   GROUP BY building, room;""" % (lower, upper)
         self.cursor.execute(self.query)
 
         return self.cursor.fetchall()

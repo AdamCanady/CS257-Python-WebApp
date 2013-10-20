@@ -46,7 +46,7 @@ if 'form_type' in form:
             result = db.get_rooms_by_preference(building, occupancy, environment)
 
             # Build output
-            content = gen.make_table(result)
+            content = gen.make_table(result, ['Average Draw Number', 'Building', 'Room Number'])
 
             gen_page = gen.make_results_page(title, content)
 
@@ -71,7 +71,7 @@ if 'form_type' in form:
             safety = db.get_rooms_in_range(safety_number, 10000)
 
             # Build output
-            headers = ["Building", "Room", "Occupancy", "Sub Free?", "Quiet?"]
+            headers = ["Average Draw Number", "Building", "Room", "Occupancy", "Sub Free?", "Quiet?"]
 
             stretch_table = gen.make_table(stretch, headers)
             target_table = gen.make_table(target, headers)
@@ -180,7 +180,7 @@ if 'form_type' in form:
             stretch, target, safety = db.get_rooms_near_location(converted_draw_number, favorite_location)
 
             # Build output
-            headers = ["Building", "Room", "Occupancy", "Sub Free?", "Quiet?"]
+            headers = ["Average Draw Number", "Building", "Room", "Occupancy", "Sub Free?", "Quiet?"]
 
             stretch_table = gen.make_table(stretch, headers)
             target_table = gen.make_table(target, headers)
@@ -221,7 +221,7 @@ if 'form_type' in form:
 
             content += "<h3>So you should choose one of the following:</h3>\n"
 
-            headers = ["Building", "Room", "Occupancy", "Sub Free?", "Quiet?"]
+            headers = ["Average Draw Number", "Building", "Room", "Occupancy", "Sub Free?", "Quiet?"]
 
             stretch_table = gen.make_table(stretch, headers)
             target_table = gen.make_table(target, headers)
