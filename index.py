@@ -94,10 +94,11 @@ if 'form_type' in form:
             # Get inputs
             room_number = int(form['room_number'].value)
             draw_number = int(form['draw_number'].value)
+            converted_draw_number = db.convert_number(draw_number)
             building = form['building'].value
 
             # Query DB for info
-            result = db.
+            result = db.specific_room_possibility(converted_draw_number, room_number, building)
 
             if result == "Stretch":
                 content = "This room would be a stretch room given your draw number."
@@ -117,17 +118,20 @@ if 'form_type' in form:
             print gen_page
 
         if form['form_type'].value == "room_like_this":
+            title = "Here are some rooms that fit your preferences:"
+
             # Get inputs
             draw_number = int(form['draw_number'].value)
+            converted_draw_number = db.convert_number(draw_number)
             environment = form['environment'].value
             occupancy = int(form['occupancy'].value)
             building = form['building'].value
 
             # Query DB for info
-            result = db.
+            result = db.get_rooms_like_this(converted_draw_number, environment, occupancy, building)
 
             # Build output
-            content = gen.make_table(result)
+            content = gen.make_table(result, ['Building', 'Room'])
 
             gen_page = gen.results_page(title, content)
 
@@ -135,12 +139,15 @@ if 'form_type' in form:
             print gen_page
 
         if form['form_type'].value == "best_room_near_location":
+            title = "Here are some rooms near " + form['favorite_location'].value
+
             # Get inputs
             draw_number = int(form['draw_number'].value)
+            converted_enemy_number = db.convert_number(enemy_number)
             favorite_location = form['favorite_location'].value
 
             # Query DB for info
-            result = db.
+            result = db.get_rooms_near_location(converted_draw_number, favorite_location)
 
             # Build output
             content = gen.make_table(result)
@@ -151,14 +158,20 @@ if 'form_type' in form:
             print gen_page
 
         if form['form_type'].value == "mortal_enemy":
-            enemy_number =
-            draw_number =
+            title = "Here are some rooms far away from your mortal enemy:"
+
+            # Get inputs
+            enemy_number = int(form['enemy_number'].value)
+            converted_enemy_number = db.convert_number(enemy_number)
+            draw_number = int(form['draw_number'].value)
+            converted_draw_number = db.convert_number(draw_number)
 
             # Query DB for info
-            result = db.get_rooms_far_away(enemy_number, draw_number)
+            result = db.get_rooms_far_away(converted_enemy_number, converted_draw_number)
 
             # Build output
-            content = gen.make_table(result)
+            headers = ["Building", "Room", "Occupancy", "Sub Free?", "Quiet?"]
+            content = gen.make_table(result, headers)
 
             gen_page = gen.results_page(title, content)
 
