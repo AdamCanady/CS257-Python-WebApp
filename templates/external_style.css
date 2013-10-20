@@ -4,8 +4,8 @@
 	width: 1200px;
 	padding: 15px auto;
 	font-family: helvetica, sans-serif;
-	background-color: #FFF;
 	text-align: center;
+	background-color: #E8E8E8;
 }
 
 #footer {
@@ -18,7 +18,7 @@ h2 {
 }
 
 p {
-	margin-left:40px;
+	margin-left: 100px;
 }
 
 body {
@@ -34,7 +34,6 @@ body {
 	width: 115px;
 	font-weight: bold;
 	width: 100px;
-	/*padding-right:15px;*/
 	margin-left: 240px;
 	/* The following code is generated from: http://www.colorzilla.com/gradient-editor/ */
 	background: rgb(226,226,226); /* Old browsers */
@@ -44,15 +43,17 @@ body {
 	background: -o-linear-gradient(-45deg,  rgba(226,226,226,1) 16%,rgba(219,219,219,1) 30%,rgba(209,209,209,1) 57%,rgba(254,254,254,1) 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(-45deg,  rgba(226,226,226,1) 16%,rgba(219,219,219,1) 30%,rgba(209,209,209,1) 57%,rgba(254,254,254,1) 100%); /* IE10+ */
 	background: linear-gradient(135deg,  rgba(226,226,226,1) 16%,rgba(219,219,219,1) 30%,rgba(209,209,209,1) 57%,rgba(254,254,254,1) 100%); /* W3C */
+	border: .75px solid gray;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 }
 
 #label1{
 	width: 165px;
-	text-align: right;
+	margin-left: 50px;
 	float:left;
-	padding-right:15px;
+	padding-left: 35px;
+
 }
 
 .text_box{
@@ -77,13 +78,11 @@ body {
 .accordion>ul>li {
     display:block;
     overflow: hidden;
-    margin: 0;
+    margin: 0px;
     padding: 0;
-    list-style:none;
     height:40px;
     width: 1000px;
-    /* Decorative CSS */
-    background-color:#f0f0f0;
+    background-color: #EAEAEB;
     transition: height .50s;
 }
 
@@ -93,13 +92,11 @@ body {
     padding:7px 10px 13px 10px;
     height:19px;
 
-    /* Decorative CSS */
     border-top:#f0f0f0 1px solid;
     font-family: Arial, Helvetica, sans-serif;
     text-decoration:none;
     text-transform:uppercase;
-    color: #000;
-    background: #cccccc;
+    background: #BCBCBC;
 }
 
 .accordion>ul>li>div {
@@ -115,7 +112,6 @@ body {
 }
 
 .accordion:hover>ul>li:hover>h3 {
-    /* Decorative CSS */
     background: white;
 }
 
