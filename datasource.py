@@ -71,7 +71,7 @@ class DataSource:
 
         return self.cursor.fetchall()
 
-    def get_rooms_in_range(self, upper, lower):
+    def get_rooms_in_range(self, lower, upper):
         ''' Returns a list of rooms in the format:
                 [building, room, occupancy, sub_free, quiet] '''
         self.query = """SELECT building, room, occupancy, sub_free, quiet
@@ -119,7 +119,7 @@ class DataSource:
         else:
             raise Exception('Invalid Room Draw Number') # Raised if number not between 1000 and 4000
 
-    
+
     # def get_rooms_by_number(self, number):
     #     self.query = 'SELECT draw_number, building, room_number, occupancy FROM roomdraw WHERE draw_number > %s' % number
     #     self.cursor.execute(self.query)

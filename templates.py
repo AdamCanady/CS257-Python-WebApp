@@ -11,6 +11,7 @@ class Templates():
     def __init__(self):
         self.start_page = open('templates/front_page.html')
         self.results_template = open('templates/results.html')
+        self.error_page = open('templates/error.html')
 
     def get_results_page(self, title, content):
         results_template = self.results_template.read()
@@ -20,6 +21,9 @@ class Templates():
     def get_start_page(self):
         return self.start_page.read()
 
+    def error_page(self):
+        return self.error_page.read()
+
     def make_table(list_of_tuples, headers = []):
         print '<table class=".table">\n'
 
@@ -27,15 +31,15 @@ class Templates():
             print '  <tr class=".headers">\n'
             for header in headers:
                 print '    <td class=".header">'+header+"</td>\n"
-            print "  </tr>"
+            print "  </tr>\n"
 
         for tuple in list_of_tuples:
             print '  <tr class=".row">\n'
             for item in tuple:
                 print '    <td class=".cell">'+item+"</td>\n"
-            print "  </tr>"
+            print "  </tr>\n"
 
-        print "</table>"
+        print "</table>\n"
 
 ''' Tests '''
 if __name__ == "__main__":
