@@ -151,7 +151,7 @@ class DataSource:
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
                    LEFT JOIN number_map ON avg_draw_number = number_map.db_num
                    WHERE sqrt(power((geo_lat - %s),2) + power((geo_long - %s),2))*79208 > 250
-                   GROUP BY building, room;""" % (enemy_lat, enemy_long)
+                   GROUP BY building, room, occupancy, sub_free, quiet, avg_draw_number;""" % (enemy_lat, enemy_long)
         self.cursor.execute(self.query)
 
         results = self.cursor.fetchall()
@@ -204,7 +204,7 @@ class DataSource:
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
                    LEFT JOIN number_map ON avg_draw_number = number_map.db_num
                    WHERE sqrt(power((geo_lat - %s),2) + power((geo_long - %s),2))*79208 < 250
-                   GROUP BY building, room;""" % (fav_location_lat, fav_location_long)
+                   GROUP BY building, room, occupancy, sub_free, quiet, avg_draw_number;""" % (fav_location_lat, fav_location_long)
 
         self.cursor.execute(self.query)
 

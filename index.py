@@ -25,7 +25,7 @@ form = cgi.FieldStorage()
 
 # If a form was submitted, do something about it!
 if 'form_type' in form:
-    # try:
+    try:
         # Define the database and connect
         db = datasource.DataSource()
 
@@ -242,8 +242,8 @@ if 'form_type' in form:
             # Send output
             print gen_page
 
-    # except:
-    #     print gen.get_error_page()
+    except:
+        print gen.get_error_page()
 
 else:
     print gen.get_start_page()
