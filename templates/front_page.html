@@ -1,284 +1,299 @@
 <html>
-            <head>
-                <title>Room Finder Extraordinaire -- Start Page</title>
-                <link rel="stylesheet" type="text/css" href="external_style.css">
-            </head>
+    <head>
+        <title>Room Finder Extraordinaire -- Start Page</title>
+        <link rel="stylesheet" type="text/css" href="external_style.css">
+    </head>
 
-            <body>
-                <div id="content">
-                        <h1>Room Finder Extraordinaire</h1>
-                        <div class="accordion">
-                        <ul>
-                            <li>    
-                                <h2>Which rooms are available?</h2>
-                                <div>
-                                    <form action="index.py" method="get">
-                                        <p><label for="fav_locations" id="label1">Hall/House:</label>
-                                            <select name="dorms_houses" id="text_box" required>
-                                                <option value="">Select A Hall/House</option>
-                                                <option value="">No Preference</option>
-                                                <option value="">----Hall----</option>
-                                                <option value="burton">Burton</option>
-                                                <option value="cassat">Cassat</option>
-                                                <option value="davis">Davis</option>
-                                                <option value="evans">Evans</option>
-                                                <option value="goodhue">Goodhue</option>
-                                                <option value="james">James</option>
-                                                <option value="myers">Myers</option>
-                                                <option value="nourse">Nourse</option>
-                                                <option value="severance">Severance</option>
-                                                <option value="watson">Watson</option>
-                                                <option value="">----Houses----</option>
-                                                <option value="allen">Allen</option>
-                                                <option value="benton">Benton</option>
-                                                <option value="berg">Berg</option>
-                                                <option value="brooks">Brooks</option>
-                                                <option value="chaney">Chaney</option>
-                                                <option value="clader">Clader</option>
-                                                <option value="collier">Collier</option>
-                                                <option value="colwell">Colwell</option>
-                                                <option value="dacie_moses">Dacie Moses</option>
-                                                <option value="dixon">Dixon</option>
-                                                <option value="douglas">Douglas</option>
-                                                <option value="dow">Dow</option>
-                                                <option value="eugster">Eugster</option>
-                                                <option value="faculty_club">Faculty Club</option>
-                                                <option value="farm">Farm</option>
-                                                <option value="geffert">Geffert</option>
-                                                <option value="hall">Hall</option>
-                                                <option value="henrickson">Henrickson</option>
-                                                <option value="hill">Hill</option>
-                                                <option value="hunt_cottage">Hunt Cottage </option>
-                                                <option value="hunt">Hunt</option>
-                                                <option value="huntington">Huntington</option>
-                                                <option value="jewett">Jewett</option>
-                                                <option value="nason">Nason</option>
-                                                <option value="owens">Owens</option>
-                                                <option value="page">Page</option>
-                                                <option value="parish">Parish</option>
-                                                <option value="parr">Parr</option>
-                                                <option value="prentice">Prentice</option>b
-                                                <option value="rice">Rice</option>
-                                                <option value="scott">Scott</option>
-                                                <option value="stimson">Stimson</option>
-                                                <option value="williams">Williams</option>
-                                                <option value="wilson">Wilson</option>
-                                            </select><span class="required">*</span>
+    <body>
+        <div id="content">
+            <h1>Room Finder Extraordinaire</h1>
+            <div class="accordion">
+                <ul>
+                    <li>
+                        <h2>Which rooms are available?</h2>
+                        <form action="index.py" method="get">
+                            <input type="hidden" name="form_type" value="available_rooms"/>
+                            <p><label for="fav_locations" id="label1">Hall/House:</label>
+                                <select name="dorms_houses" class="text_box" required>
+                                    <option value="">Select A Hall/House</option>
+                                    <option value="">No Preference</option>
+                                    <option value="">----Hall----</option>
+                                    <option value="burton">Burton</option>
+                                    <option value="cassat">Cassat</option>
+                                    <option value="davis">Davis</option>
+                                    <option value="evans">Evans</option>
+                                    <option value="goodhue">Goodhue</option>
+                                    <option value="james">James</option>
+                                    <option value="myers">Myers</option>
+                                    <option value="nourse">Nourse</option>
+                                    <option value="severance">Severance</option>
+                                    <option value="watson">Watson</option>
+                                    <option value="">----Houses----</option>
+                                    <option value="allen">Allen</option>
+                                    <option value="benton">Benton</option>
+                                    <option value="berg">Berg</option>
+                                    <option value="brooks">Brooks</option>
+                                    <option value="chaney">Chaney</option>
+                                    <option value="clader">Clader</option>
+                                    <option value="collier">Collier</option>
+                                    <option value="colwell">Colwell</option>
+                                    <option value="dacie_moses">Dacie Moses</option>
+                                    <option value="dixon">Dixon</option>
+                                    <option value="douglas">Douglas</option>
+                                    <option value="dow">Dow</option>
+                                    <option value="eugster">Eugster</option>
+                                    <option value="faculty_club">Faculty Club</option>
+                                    <option value="farm">Farm</option>
+                                    <option value="geffert">Geffert</option>
+                                    <option value="hall">Hall</option>
+                                    <option value="henrickson">Henrickson</option>
+                                    <option value="hill">Hill</option>
+                                    <option value="hunt_cottage">Hunt Cottage </option>
+                                    <option value="hunt">Hunt</option>
+                                    <option value="huntington">Huntington</option>
+                                    <option value="jewett">Jewett</option>
+                                    <option value="nason">Nason</option>
+                                    <option value="owens">Owens</option>
+                                    <option value="page">Page</option>
+                                    <option value="parish">Parish</option>
+                                    <option value="parr">Parr</option>
+                                    <option value="prentice">Prentice</option>b
+                                    <option value="rice">Rice</option>
+                                    <option value="scott">Scott</option>
+                                    <option value="stimson">Stimson</option>
+                                    <option value="williams">Williams</option>
+                                    <option value="wilson">Wilson</option>
+                                </select><span class="required">*</span>
 
-                                        <p><label for="environment" id="label1">Desired Environment:</label><input type="radio" name="environment" value="sub_free" required> Sub-Free
-                                           <input type="radio" name="environment" value="quiet" id="radio"> Quiet
-                                           <input type="radio" name="environment" value="no_preference" id="radio"> No Preference<span class="required">*</span>
+                            <p><label for="environment" id="label1">Desired Environment:</label><input type="radio" name="environment" value="sub_free" required> Sub-Free
+                               <input type="radio" name="environment" value="quiet" id="radio"> Quiet
+                               <input type="radio" name="environment" value="no_preference" id="radio"> No Preference<span class="required">*</span>
 
-                                        </p>
+                            </p>
 
-                                        <p><label for="occupancy" id="label1">Desired Occupancy:</label><input type="radio" name="occupancy" value="1" required> Single
-                                            <input type="radio" name="occupancy" value="2" id="radio"> Double
-                                            <input type="radio" name="occupancy" value="3" id="radio"> Triple
-                                            <input type="radio" name="occupancy" value="4" id="radio"> Quad+
-                                            <input type="radio" name="occupancy" value="0" id="radio"> No Preference<span class="required">*</span>
-                                        </p>
+                            <p><label for="occupancy" id="label1">Desired Occupancy:</label><input type="radio" name="occupancy" value="1" required> Single
+                                <input type="radio" name="occupancy" value="2" id="radio"> Double
+                                <input type="radio" name="occupancy" value="3" id="radio"> Triple
+                                <input type="radio" name="occupancy" value="4" id="radio"> Quad+
+                                <input type="radio" name="occupancy" value="0" id="radio"> No Preference<span class="required">*</span>
+                            </p>
 
 
-                                        <p><input type="submit" value="FIND ME A ROOM" id="submit" /></p>
-                                    </form>
-                                </div>
-                            </li>
+                            <p><input type="submit" value="FIND ME A ROOM" id="submit" /></p>
+                        </form>
+                    </li>
 
-                            <li>
-                                <h2>Which room can I get?</h2>
-                                    <form action="index.py" method="get">
-                                        <p class="tab"><label for="draw_number" id="label1">Room Draw Number:</label><input type="text" name="draw_number" placeholder = "ie. 1025, 2245, 3001" id="text_box" required /><span class="required">*</span></p>
-                                        <p class="tab"> <input type="submit" value="FIND ME A ROOM" id="submit" /></p>
-                                    </form>
-                            </li>
+                    <li>
+                        <h2>Which rooms can I get?</h2>
+                        <form action="index.py" method="get">
+                            <input type="hidden" name="form_type" value="which_rooms"/>
+                            <p class="tab"><label for="draw_number" id="label1">Room Draw Number:</label><input type="text" name="draw_number" placeholder = "ie. 1025, 2245, 3001" class="text_box" required /><span class="required">*</span></p>
+                            <p class="tab"> <input type="submit" value="FIND ME A ROOM" id="submit" /></p>
+                        </form>
+                    </li>
 
-                            <li>
-                                <h2>Can I get my dream room??</h2>
-                                    <form action="index.py" method="get">
-                                        <p><label for="room_number" id="label1">Desired Room Number:</label><input type="text" placeholder ="ie. 202, 101a" name="room_number" id="text_box" required/><span class="required">*</span></p>
-                                        <p><label for="draw_number" id="label1">Room Draw Number:</label><input type="text" placeholder = "ie. 1025, 2245, 3001" name="draw_number" id="text_box" required/><span class="required">*</span></p>
+                    <li>
+                        <h2>Can I get my dream room?</h2>
+                        <form action="index.py" method="get">
+                            <input type="hidden" name="form_type" value="dream_room"/>
+                            <p><label for="room_number" id="label1">Desired Room Number:</label><input type="text" placeholder ="ie. 202, 101a" name="room_number" class="text_box" required/><span class="required">*</span></p>
+                            <p><label for="draw_number" id="label1">Room Draw Number:</label><input type="text" placeholder = "ie. 1025, 2245, 3001" name="draw_number" class="text_box" required/><span class="required">*</span></p>
 
-                                        <p><label for="fav_locations" id="label1">Hall/House:</label>
-                                            <select name="dorms_houses" id="text_box" required>
-                                                <option value="">Select A Hall/House</option>
-                                                <option value=>----Halls----</option>
-                                                <option value="burton">Burton</option>
-                                                <option value="cassat">Cassat</option>
-                                                <option value="davis">Davis</option>
-                                                <option value="evans">Evans</option>
-                                                <option value="goodhue">Goodhue</option>
-                                                <option value="james">James</option>
-                                                <option value="myers">Myers</option>
-                                                <option value="nourse">Nourse</option>
-                                                <option value="severance">Severance</option>
-                                                <option value="watson">Watson</option>
-                                                <option value="">----Houses----</option>
-                                                <option value="allen">Allen</option>
-                                                <option value="benton">Benton</option>
-                                                <option value="berg">Berg</option>
-                                                <option value="brooks">Brooks</option>
-                                                <option value="chaney">Chaney</option>
-                                                <option value="clader">Clader</option>
-                                                <option value="collier">Collier</option>
-                                                <option value="colwell">Colwell</option>
-                                                <option value="dacie_moses">Dacie Moses</option>
-                                                <option value="dixon">Dixon</option>
-                                                <option value="douglas">Douglas</option>
-                                                <option value="dow">Dow</option>
-                                                <option value="eugster">Eugster</option>
-                                                <option value="faculty_club">Faculty Club</option>
-                                                <option value="farm">Farm</option>
-                                                <option value="geffert">Geffert</option>
-                                                <option value="hall">Hall</option>
-                                                <option value="henrickson">Henrickson</option>
-                                                <option value="hill">Hill</option>
-                                                <option value="hunt_cottage">Hunt Cottage </option>
-                                                <option value="hunt">Hunt</option>
-                                                <option value="huntington">Huntington</option>
-                                                <option value="jewett">Jewett</option>
-                                                <option value="nason">Nason</option>
-                                                <option value="owens">Owens</option>
-                                                <option value="page">Page</option>
-                                                <option value="parish">Parish</option>
-                                                <option value="parr">Parr</option>
-                                                <option value="prentice">Prentice</option>b
-                                                <option value="rice">Rice</option>
-                                                <option value="scott">Scott</option>
-                                                <option value="stimson">Stimson</option>
-                                                <option value="williams">Williams</option>
-                                                <option value="wilson">Wilson</option>
-                                            </select><span class="required">*</span>                      
-                                        </p>
+                            <p><label for="fav_locations" id="label1">Hall/House:</label>
+                                <select name="dorms_houses" class="text_box" required>
+                                    <option value="">Select A Hall/House</option>
+                                    <option value=>----Halls----</option>
+                                    <option value="burton">Burton</option>
+                                    <option value="cassat">Cassat</option>
+                                    <option value="davis">Davis</option>
+                                    <option value="evans">Evans</option>
+                                    <option value="goodhue">Goodhue</option>
+                                    <option value="james">James</option>
+                                    <option value="myers">Myers</option>
+                                    <option value="nourse">Nourse</option>
+                                    <option value="severance">Severance</option>
+                                    <option value="watson">Watson</option>
+                                    <option value="">----Houses----</option>
+                                    <option value="allen">Allen</option>
+                                    <option value="benton">Benton</option>
+                                    <option value="berg">Berg</option>
+                                    <option value="brooks">Brooks</option>
+                                    <option value="chaney">Chaney</option>
+                                    <option value="clader">Clader</option>
+                                    <option value="collier">Collier</option>
+                                    <option value="colwell">Colwell</option>
+                                    <option value="dacie_moses">Dacie Moses</option>
+                                    <option value="dixon">Dixon</option>
+                                    <option value="douglas">Douglas</option>
+                                    <option value="dow">Dow</option>
+                                    <option value="eugster">Eugster</option>
+                                    <option value="faculty_club">Faculty Club</option>
+                                    <option value="farm">Farm</option>
+                                    <option value="geffert">Geffert</option>
+                                    <option value="hall">Hall</option>
+                                    <option value="henrickson">Henrickson</option>
+                                    <option value="hill">Hill</option>
+                                    <option value="hunt_cottage">Hunt Cottage </option>
+                                    <option value="hunt">Hunt</option>
+                                    <option value="huntington">Huntington</option>
+                                    <option value="jewett">Jewett</option>
+                                    <option value="nason">Nason</option>
+                                    <option value="owens">Owens</option>
+                                    <option value="page">Page</option>
+                                    <option value="parish">Parish</option>
+                                    <option value="parr">Parr</option>
+                                    <option value="prentice">Prentice</option>b
+                                    <option value="rice">Rice</option>
+                                    <option value="scott">Scott</option>
+                                    <option value="stimson">Stimson</option>
+                                    <option value="williams">Williams</option>
+                                    <option value="wilson">Wilson</option>
+                                </select><span class="required">*</span>
+                            </p>
 
-                                        <p><input type="submit" value="FIND ME A ROOM" id="submit" /></p>
-                                    </form>
-                                </li>
-                                <li>
-                                    <h2>Can I get a room like this?</h2>
-                                        <form action="index.py" method="get">
-                                            <p class="tab"><label for="draw_number" id="label1" required>Room Draw Number:</label><input type="text" name="draw_number" placeholder = "ie. 1025, 2245, 3001" id="text_box" required/><span class="required">*</span>
-                                            </p>
-                                            <p><label for="environment" id="label1">Desired Environment:</label><input type="radio" name="environment" value"subfree" required> Sub-Free
-                                                   <input type="radio" name="environment" value="quiet" id="radio"> Quiet
-                                                   <input type="radio" name="environment" value="" id="radio"> No preference
-                                                   <span class="required">*</span>
-                                            </p>
+                            <p><input type="submit" value="FIND ME A ROOM" id="submit" /></p>
+                        </form>
+                    </li>
+                    <li>
+                        <h2>Can I get a room like this?</h2>
+                        <form action="index.py" method="get">
+                            <input type="hidden" name="form_type" value="room_like_this"/>
+                            <p class="tab"><label for="draw_number" id="label1" required>Room Draw Number:</label><input type="text" name="draw_number" placeholder = "ie. 1025, 2245, 3001" class="text_box" required/><span class="required">*</span>
+                            </p>
+                            <p><label for="environment" id="label1">Desired Environment:</label><input type="radio" name="environment" value"subfree" required> Sub-Free
+                                   <input type="radio" name="environment" value="quiet" id="radio"> Quiet
+                                   <input type="radio" name="environment" value="" id="radio"> No preference
+                                   <span class="required">*</span>
+                            </p>
 
-                                            <p><label for="occupancy" id="label1">Desired Occupancy:</label><input type="radio" name="occupancy" value=1 required> Single
-                                                    <input type="radio" name="occupancy" value= "2" id="radio"> Double
-                                                    <input type="radio" name="occupancy" value= "3" id="radio"> Triple
-                                                    <input type="radio" name="occupancy" value= "4" id="radio"> Quad+
-                                                    <input type="radio" name="occupancy" value= "0" id="radio"> No preference<span class="required">*</span>
-                                            </p>
+                            <p><label for="occupancy" id="label1">Desired Occupancy:</label><input type="radio" name="occupancy" value=1 required> Single
+                                    <input type="radio" name="occupancy" value= "2" id="radio"> Double
+                                    <input type="radio" name="occupancy" value= "3" id="radio"> Triple
+                                    <input type="radio" name="occupancy" value= "4" id="radio"> Quad+
+                                    <input type="radio" name="occupancy" value= "0" id="radio"> No preference<span class="required">*</span>
+                            </p>
 
-                                            <p><label for="fav_locations" id="label1">Hall/House:</label>
-                                                    <select name="dorms_houses" id="text_box" required>
-                                                        <option value="">Select A Hall/House</option>
-                                                        <option value="">No Preference</option>
-                                                        <option value="">----Hall----</option>
-                                                        <option value="burton">Burton</option>
-                                                        <option value="cassat">Cassat</option>
-                                                        <option value="davis">Davis</option>
-                                                        <option value="evans">Evans</option>
-                                                        <option value="goodhue">Goodhue</option>
-                                                        <option value="james">James</option>
-                                                        <option value="myers">Myers</option>
-                                                        <option value="nourse">Nourse</option>
-                                                        <option value="severance">Severance</option>
-                                                        <option value="watson">Watson</option>
-                                                        <option value="">----Houses----</option>
-                                                        <option value="allen">Allen</option>
-                                                        <option value="benton">Benton</option>
-                                                        <option value="berg">Berg</option>
-                                                        <option value="brooks">Brooks</option>
-                                                        <option value="chaney">Chaney</option>
-                                                        <option value="clader">Clader</option>
-                                                        <option value="collier">Collier</option>
-                                                        <option value="colwell">Colwell</option>
-                                                        <option value="dacie_moses">Dacie Moses</option>
-                                                        <option value="dixon">Dixon</option>
-                                                        <option value="douglas">Douglas</option>
-                                                        <option value="dow">Dow</option>
-                                                        <option value="eugster">Eugster</option>
-                                                        <option value="faculty_club">Faculty Club</option>
-                                                        <option value="farm">Farm</option>
-                                                        <option value="geffert">Geffert</option>
-                                                        <option value="hall">Hall</option>
-                                                        <option value="henrickson">Henrickson</option>
-                                                        <option value="hill">Hill</option>
-                                                        <option value="hunt_cottage">Hunt Cottage </option>
-                                                        <option value="hunt">Hunt</option>
-                                                        <option value="huntington">Huntington</option>
-                                                        <option value="jewett">Jewett</option>
-                                                        <option value="nason">Nason</option>
-                                                        <option value="owens">Owens</option>
-                                                        <option value="page">Page</option>
-                                                        <option value="parish">Parish</option>
-                                                        <option value="parr">Parr</option>
-                                                        <option value="prentice">Prentice</option>b
-                                                        <option value="rice">Rice</option>
-                                                        <option value="scott">Scott</option>
-                                                        <option value="stimson">Stimson</option>
-                                                        <option value="williams">Williams</option>
-                                                        <option value="wilson">Wilson</option>
-                                                    </select> 
-                                            </p>                            
+                            <p><label for="fav_locations" id="label1">Hall/House:</label>
+                                    <select name="dorms_houses" class="text_box" required>
+                                        <option value="">Select A Hall/House</option>
+                                        <option value="">No Preference</option>
+                                        <option value="">----Hall----</option>
+                                        <option value="burton">Burton</option>
+                                        <option value="cassat">Cassat</option>
+                                        <option value="davis">Davis</option>
+                                        <option value="evans">Evans</option>
+                                        <option value="goodhue">Goodhue</option>
+                                        <option value="james">James</option>
+                                        <option value="myers">Myers</option>
+                                        <option value="nourse">Nourse</option>
+                                        <option value="severance">Severance</option>
+                                        <option value="watson">Watson</option>
+                                        <option value="">----Houses----</option>
+                                        <option value="allen">Allen</option>
+                                        <option value="benton">Benton</option>
+                                        <option value="berg">Berg</option>
+                                        <option value="brooks">Brooks</option>
+                                        <option value="chaney">Chaney</option>
+                                        <option value="clader">Clader</option>
+                                        <option value="collier">Collier</option>
+                                        <option value="colwell">Colwell</option>
+                                        <option value="dacie_moses">Dacie Moses</option>
+                                        <option value="dixon">Dixon</option>
+                                        <option value="douglas">Douglas</option>
+                                        <option value="dow">Dow</option>
+                                        <option value="eugster">Eugster</option>
+                                        <option value="faculty_club">Faculty Club</option>
+                                        <option value="farm">Farm</option>
+                                        <option value="geffert">Geffert</option>
+                                        <option value="hall">Hall</option>
+                                        <option value="henrickson">Henrickson</option>
+                                        <option value="hill">Hill</option>
+                                        <option value="hunt_cottage">Hunt Cottage </option>
+                                        <option value="hunt">Hunt</option>
+                                        <option value="huntington">Huntington</option>
+                                        <option value="jewett">Jewett</option>
+                                        <option value="nason">Nason</option>
+                                        <option value="owens">Owens</option>
+                                        <option value="page">Page</option>
+                                        <option value="parish">Parish</option>
+                                        <option value="parr">Parr</option>
+                                        <option value="prentice">Prentice</option>b
+                                        <option value="rice">Rice</option>
+                                        <option value="scott">Scott</option>
+                                        <option value="stimson">Stimson</option>
+                                        <option value="williams">Williams</option>
+                                        <option value="wilson">Wilson</option>
+                                    </select>
+                            </p>
 
-                                            <p><input type="submit" value="FIND ME A ROOM" id="submit" /></p>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <h2>What's the best room I can find near my favorite location on campus?</h2>
-                                            <form action="index.py" method="get"> 
-                                                <p><label for="draw_number" id="label1">Room Draw Number:</label><input type="text" name="draw_number" placeholder = "ie. 1025, 2245, 3001" id="text_box" required/><span class="required">*</span></p>
-                                                    <p><label for="fav_locations" id="label1">Favorite Location:</label>
-                                                        <select name="fav_locations" id="text_box" required>
-                                                            <option value="">Select a Location</option>
-                                                            <option value="sayles">Sayles</option>
-                                                            <option value="willis">Willis</option>
-                                                            <option value="hulings">Hulings</option>
-                                                            <option value="olin">Olin</option>
-                                                            <option value="mudd">Mudd</option>
-                                                            <option value="cmc">CMC</option>
-                                                            <option value="boliou">Boliou</option>
-                                                            <option value="laird">Laird</option>
-                                                            <option value="gould">Gould</option>
-                                                            <option value="leighton">Leighton</option>
-                                                            <option value="west_athletic_complex">West Athletic Complex</option>
-                                                            <option value="recreation_center">Recreation Center</option>
-                                                            <option value="downtown_northfield">Downtown Northfield</option>
-                                                            <option value="st_olaf">St Olaf</option>
-                                                            <option value="bald_spot">Bald Spot</option>
-                                                            <option value="weitz">Weitz</option>
-                                                            <option value="mini_bald_spot">Mini Bald Spot</option>
-                                                            <option value="upper_arb">Upper Arb</option>
-                                                            <option value="lower_arb">Lower Arb</option>
-                                                            <option value="cowling">Cowling</option>
-                                                            <option value="bell_field">Bell Field</option>
-                                                            <option value="ldc">LDC</option>
-                                                            <option value="goodsell">Goodsell</option>
-                                                            <option value="concert_hall">Concert Hall</option>
-                                                            <option value="music_hall">Music Hall</option>
-                                                            <option value="scoville">Scoville</option>
-                                                            <option value="facilities">Facilities</option>
-                                                            <option value="tunnels">Tunnels</option>
-                                                        </select>
-                                                        <span class="required">*</span>
-                                                    </p>
-                                                <p><input type="submit" value="FIND ME A ROOM" id="submit"/></p>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <h2>How can I avoid my mortal enemy?</h2>
-                                                <form action="index.py" method="get">
-                                                    <p><label for="enemy_number" id="label1">Enemy Draw Number:</label><input type="text" name="enemy_draw_number" placeholder = "ie. 1025, 2245, 3001" id="text_box" required/><span class="required">*</span></p>
-                                                    <p><label for="my_draw_number" id="label1">Your Draw Number:</label><input type="text" name="my_draw_number" placeholder = "ie. 1025, 2245, 3001" id="text_box" required/><span class="required">*</span></p>
-                                                    <p><input type="submit" value="FIND ME A ROOM" id="submit"/></p>
-                                                </form>
-                                        </li>
-                                    </ul>
-                                    </div>
-                                    </div>
-            </body>                  
-            </html>
-            
+                            <p><input type="submit" value="FIND ME A ROOM" id="submit" /></p>
+                        </form>
+                    </li>
+                    <li>
+                        <h2>What's rooms can I get near my favorite location on campus?</h2>
+                        <form action="index.py" method="get">
+                            <input type="hidden" name="form_type" value="best_room_near_location"/>
+                            <p><label for="draw_number" id="label1">Room Draw Number:</label><input type="text" name="draw_number" placeholder = "ie. 1025, 2245, 3001" class="text_box" required/><span class="required">*</span></p>
+                                <p><label for="fav_locations" id="label1">Favorite Location:</label>
+                                    <select name="fav_locations" class="text_box" required>
+                                        <option value="">Select a Location</option>
+                                        <option value="sayles">Sayles</option>
+                                        <option value="willis">Willis</option>
+                                        <option value="hulings">Hulings</option>
+                                        <option value="olin">Olin</option>
+                                        <option value="mudd">Mudd</option>
+                                        <option value="cmc">CMC</option>
+                                        <option value="boliou">Boliou</option>
+                                        <option value="laird">Laird</option>
+                                        <option value="gould">Gould</option>
+                                        <option value="leighton">Leighton</option>
+                                        <option value="west_athletic_complex">West Athletic Complex</option>
+                                        <option value="recreation_center">Recreation Center</option>
+                                        <option value="downtown_northfield">Downtown Northfield</option>
+                                        <option value="st_olaf">St Olaf</option>
+                                        <option value="bald_spot">Bald Spot</option>
+                                        <option value="weitz">Weitz</option>
+                                        <option value="mini_bald_spot">Mini Bald Spot</option>
+                                        <option value="upper_arb">Upper Arb</option>
+                                        <option value="lower_arb">Lower Arb</option>
+                                        <option value="cowling">Cowling</option>
+                                        <option value="bell_field">Bell Field</option>
+                                        <option value="ldc">LDC</option>
+                                        <option value="goodsell">Goodsell</option>
+                                        <option value="concert_hall">Concert Hall</option>
+                                        <option value="music_hall">Music Hall</option>
+                                        <option value="scoville">Scoville</option>
+                                        <option value="facilities">Facilities</option>
+                                        <option value="tunnels">Tunnels</option>
+                                    </select>
+                                    <span class="required">*</span>
+                                </p>
+                            <p><input type="submit" value="FIND ME A ROOM" id="submit"/></p>
+                        </form>
+                    </li>
+                    <li>
+                        <h2>How can I avoid my mortal enemy?</h2>
+                        <form action="index.py" method="get">
+                            <input type="hidden" name="form_type" value="best_room_near_location"/>
+
+                            <p><label for="enemy_number" id="label1">Enemy Draw Number:</label>
+                               <input type="text" name="enemy_draw_number" placeholder = "ie. 1025, 2245, 3001" class="text_box" required/>
+                               <span class="required">*</span>
+                            </p>
+
+                            <p><label for="my_draw_number" id="label1">Your Draw Number:</label>
+                                <input type="text" name="my_draw_number" placeholder = "ie. 1025, 2245, 3001" class="text_box" required/>
+                                <span class="required">*</span>
+                            </p>
+
+                            <p><input type="submit" value="FIND ME A ROOM" id="submit"/></p>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div id="footer">
+                <p>CS 257, Jeff Ondich, Fall 2013 - Erin Wilson, Jiatao Cheng, and Adam Canady</p>
+            </div>
+        </div>
+    </body>
+</html>

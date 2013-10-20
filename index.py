@@ -27,7 +27,16 @@ form = cgi.FieldStorage()
 # ***** SANITIZE USER INPUT HERE ****
 
 # If a form was submitted, do something about it!
-if 'draw_number' in form:
+if 'form_type' in form:
+    if form['form_type'].value == "available_rooms":
+
+    if form['form_type'].value == "which_rooms":
+
+    if form['form_type'].value == "dream_room":
+
+    if form['form_type'].value == "room_like_this":
+
+    if form['form_type'].value == "best_room_near_location":
     # Get the user's draw number
     user_draw_number = form['draw_number'].value
     db = datasource.DataSource()
