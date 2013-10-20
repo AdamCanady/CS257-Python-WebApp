@@ -242,7 +242,7 @@ class DataSource:
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
                    LEFT JOIN number_map ON avg_draw_number = number_map.db_num
                    WHERE avg_draw_number > %d and avg_draw_number < %d
-                   GROUP BY building, room;""" % (lower, upper)
+                   GROUP BY building, room, occupancy, sub_free, quiet;""" % (lower, upper)
         self.cursor.execute(self.query)
 
         return self.cursor.fetchall()
