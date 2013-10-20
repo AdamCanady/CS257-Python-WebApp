@@ -29,6 +29,7 @@ if 'form_type' in form:
         # Define the database and connect
         db = datasource.DataSource()
 
+        # Displays all available rooms
         if form['form_type'].value == "available_rooms":
             title = "Available Rooms"
 
@@ -48,6 +49,7 @@ if 'form_type' in form:
             # Send output
             print gen_page
 
+        # Displays rooms and likeliness given user's draw number
         if form['form_type'].value == "which_rooms":
             title = "Here's a list of rooms you could get:"
 
@@ -88,6 +90,7 @@ if 'form_type' in form:
             # Send output
             print gen_page
 
+        # Displays likeliness of a user drawing their dream room
         if form['form_type'].value == "dream_room":
             title = "Dream Room Results"
 
@@ -101,13 +104,13 @@ if 'form_type' in form:
             result = db.specific_room_possibility(converted_draw_number, room_number, building)
 
             if result == "Stretch":
-                content = "This room would be a stretch room given your draw number."
+                content = "This room would be a STRETCH room given your draw number."
 
             elif result == "Target":
-                content = "This room would be a target room given your draw number."
+                content = "This room would be a TARGET room given your draw number."
 
             elif result == "Safety":
-                content = "This room would be a safety room given your draw number."
+                content = "This room would be a SAFETY room given your draw number."
 
             elif result == "Draw Not Available":
                 content = "Either this room is not availabe for drawing, or we don't have data on it"
@@ -117,6 +120,8 @@ if 'form_type' in form:
             # Send output
             print gen_page
 
+        # Displays lists of rooms that match user indicated preferences and
+        # the likelihood of getting those rooms
         if form['form_type'].value == "room_like_this":
             title = "Here are some rooms that fit your preferences:"
 
@@ -138,6 +143,8 @@ if 'form_type' in form:
             # Send output
             print gen_page
 
+        # Displays lists of rooms within 250m of user's favorite location and
+        # the likelihood of getting those rooms
         if form['form_type'].value == "best_room_near_location":
             title = "Here are some rooms near " + form['favorite_location'].value
 
@@ -173,6 +180,7 @@ if 'form_type' in form:
             # Send output
             print gen_page
 
+        # Displays rooms outside of a 250m radius of an enemy's target room
         if form['form_type'].value == "mortal_enemy":
             title = "Here are some rooms far away from your mortal enemy:"
 

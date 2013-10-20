@@ -34,13 +34,17 @@ class DataSource:
     def close(self):
         self.connection.close()
 
+    # Function to generate queries based on preferences indicated by the user in web form
     def get_rooms_by_preference(self, user_input_building = "",
                                       user_input_occupancy = 0,
                                       user_input_environment = ""):
+
         self.query = """SELECT avg_draw_number, building, room
                    FROM rooms
                    LEFT JOIN buildings ON rooms.building_id = buildings.id \n"""
 
+        # The if/else clauses are used to determine if we need to create
+        # a new WHERE block or add to an existing one
         if user_input_occupancy > 0:
             if "WHERE" in self.query:
                 self.query += " AND "
@@ -75,6 +79,14 @@ class DataSource:
 
         return self.cursor.fetchall()
 
+    # Function that takes user preferences as input and returns lists of rooms
+    # with certain categorical probability given the user's draw number
+        # Stretch: not likely to get this room
+            # (rooms with average draws < 30 of you)
+        # Target: number is right in range of getting this room
+            # (rooms with average draws within +/- 30 of you)
+        # Safety: very likely to get this room
+            # (rooms with average draws > 30 of you)
     def get_rooms_like_this(self, converted_draw_number,
                                   user_input_environment,
                                   user_input_occupancy,
@@ -84,6 +96,7 @@ class DataSource:
 
         rooms = self.get_rooms_by_preference(user_input_building, user_input_occupancy, user_input_environment)
 
+        # calculate span of user's target rooms
         upper_target_bound = converted_draw_number + 30
         lower_target_bound = converted_draw_number - 30
 
@@ -91,8 +104,8 @@ class DataSource:
         target = []
         safety = []
 
+        # Sort rooms into categories of likeliness
         for room in rooms:
-            avg_draw_number, building, room
             if room[0] < lower_target_bound:
                 stretch.append(room)
 
@@ -103,17 +116,19 @@ class DataSource:
                 safety.append(room)
 
         else:
-            raise Exception("No rooms found near your favorite location!")
+            raise Exception("No rooms found that match your preferences... :(")
 
         return stretch, target, safety
 
+    # Function to help a user avoid an enemy because we are on such a small campus!
     def get_rooms_far_away(self, converted_enemy_number,
                                  converted_draw_number):
         ''' Returns a list of rooms in the format:
                 [building, room, occupancy, sub_free, quiet]
             that are at least 250 meters away from each other.'''
 
-        # Find enemy's target room
+        # Find enemy's target room where "target room" is defined as the
+        # room whose average draw number is closest to the enemy's draw number
         self.query = """SELECT building, room, occupancy, sub_free, quiet, geo_lat, geo_long, abs(avg_draw_number - %d) as draw_distance
                    FROM rooms
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
@@ -129,15 +144,16 @@ class DataSource:
         else:
             raise Exception('Something went wrong while determining your enemy\'s best room!')
 
-        # Find room at least 250m away
+        # Find rooms outside a 250m radius from enemy's target room
         self.query = """SELECT building, room, occupancy, sub_free, quiet
                    FROM rooms
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
-                   WHERE acos(sin(geo_lat) + sin(%f) + cos(geo_lat)*cos(%f)*(cos(%f-geo_lon)))*6371000 > 250;""" % (enemy_lat, enemy_lat enemy_lon)
+                   WHERE acos(sin(geo_lat) + sin(%f) + cos(geo_lat)*cos(%f)*(cos(%f-geo_lon)))*6371000 > 250;""" % (enemy_lat, enemy_lat, enemy_lon)
         self.cursor.execute(self.query)
 
         return self.cursor.fetchall()
 
+    # Function to help a user find a room near a favorite location
     def get_rooms_near_location(self, converted_draw_number,
                                       favorite_location):
 
@@ -156,7 +172,7 @@ class DataSource:
         else:
             raise Exception('Something went wrong while determining your favorite location!')
 
-        # Find room further than 250m away
+        # Find room within 250m radius of favorite location
         self.query = """SELECT building, room, occupancy, sub_free, quiet
                    FROM rooms
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
@@ -165,6 +181,7 @@ class DataSource:
 
         return self.cursor.fetchall()
 
+    # General function to retrieve rooms within a given range of average draw numbers
     def get_rooms_in_range(self, lower, upper):
         ''' Returns a list of rooms in the format:
                 [building, room, occupancy, sub_free, quiet] '''
@@ -176,6 +193,8 @@ class DataSource:
 
         return self.cursor.fetchall()
 
+    # Function that reports the probability that you can get a specific room
+    # (Stretch, Target, or Safety)
     def specific_room_possibility(self, converted_draw_number,
                                         room,
                                         building):
@@ -190,6 +209,7 @@ class DataSource:
         upper_target_bound = converted_draw_number + 30
         lower_target_bound = converted_draw_number - 30
 
+        # Find the category that the user's preferred room falls into
         if len(result) > 0:
             avg_draw_number = result[0][0]
             if avg_draw_number < lower_target_bound:
@@ -203,6 +223,11 @@ class DataSource:
         else:
             return "Draw Not Available"
 
+    # Function convert an assigned draw number to a number usable by the database
+        # (1001 = 1, 1002 = 2, etc)
+        # Note: because each class starts at _001 and ends around _510, real draw number 2001
+        # was assigned 511 in the database so that all draw numbers are continuous across classes.
+        # This is important for being able to accurately average draw numbers
     def convert_number(self, user_input):
         self.query = """SELECT db_num
                    FROM number_map
