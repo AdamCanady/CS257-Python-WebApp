@@ -147,10 +147,26 @@ if 'form_type' in form:
             favorite_location = form['favorite_location'].value
 
             # Query DB for info
-            result = db.get_rooms_near_location(converted_draw_number, favorite_location)
+            stretch, target, safety = db.get_rooms_near_location(converted_draw_number, favorite_location)
 
             # Build output
-            content = gen.make_table(result)
+            headers = ["Building", "Room", "Occupancy", "Sub Free?", "Quiet?"]
+
+            stretch_table = gen.make_table(stretch, headers)
+            target_table = gen.make_table(target, headers)
+            safety_table = gen.make_table(safety, headers)
+
+            content = ""
+
+            if stretch:
+                content =+ "<h3>Stretch Rooms</h3>\n"
+                content += stretch_table
+            if target:
+                content += "<h3>Target Rooms</h3>\n"
+                content += target_table
+            if safety:
+                content += "<h3>Safety Rooms</h3>\n"
+                content += safety_table
 
             gen_page = gen.results_page(title, content)
 

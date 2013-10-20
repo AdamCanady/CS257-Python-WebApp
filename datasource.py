@@ -84,12 +84,28 @@ class DataSource:
 
         rooms = self.get_rooms_by_preference(user_input_building, user_input_occupancy, user_input_environment)
 
+        upper_target_bound = converted_draw_number + 30
+        lower_target_bound = converted_draw_number - 30
+
+        stretch = []
+        target = []
+        safety = []
+
         for room in rooms:
+            avg_draw_number, building, room
+            if room[0] < lower_target_bound:
+                stretch.append(room)
+
+            elif room[0] >= lower_target_bound and room[0] < upper_target_bound:
+                target.append(room)
+
+            elif room[0] >= upper_target_bound:
+                safety.append(room)
 
         else:
-            return
+            raise Exception("No rooms found near your favorite location!")
 
-        return
+        return stretch, target, safety
 
     def get_rooms_far_away(self, converted_enemy_number,
                                  converted_draw_number):
