@@ -105,6 +105,9 @@ class DataSource:
         safety = []
 
         # Sort rooms into categories of likeliness
+        if not rooms:
+            raise Exception("No rooms found that match your preferences... :(")
+
         for room in rooms:
             if room[0] < lower_target_bound:
                 stretch.append(room)
@@ -114,9 +117,6 @@ class DataSource:
 
             elif room[0] >= upper_target_bound:
                 safety.append(room)
-
-        else:
-            raise Exception("No rooms found that match your preferences... :(")
 
         return stretch, target, safety
 
@@ -140,46 +140,93 @@ class DataSource:
         if enemy_list:
             enemy_target_room = enemy_list[0]
             enemy_lat = enemy_target_room[5]
-            enemy_lon = enemy_target_room[6]
+            enemy_long = enemy_target_room[6]
         else:
             raise Exception('Something went wrong while determining your enemy\'s best room!')
 
         # Find rooms outside a 250m radius from enemy's target room
-        self.query = """SELECT building, room, occupancy, sub_free, quiet
+        self.query = """SELECT avg_draw_number, building, room, occupancy, sub_free, quiet
                    FROM rooms
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
-                   WHERE acos(sin(geo_lat) + sin(%f) + cos(geo_lat)*cos(%f)*(cos(%f-geo_lon)))*6371000 > 250;""" % (enemy_lat, enemy_lat, enemy_lon)
+                   WHERE sqrt(power((geo_lat - %s),2) + power((geo_long - %s),2))*79208 > 250;""" % (enemy_lat, enemy_long)
         self.cursor.execute(self.query)
 
-        return self.cursor.fetchall()
+        results = self.cursor.fetchall()
+
+        # calculate span of user's target rooms
+        upper_target_bound = converted_draw_number + 30
+        lower_target_bound = converted_draw_number - 30
+
+        stretch = []
+        target = []
+        safety = []
+
+        # Sort rooms into categories of likeliness
+        for room in results:
+            if room[0] < lower_target_bound:
+                stretch.append(room)
+
+            elif room[0] >= lower_target_bound and room[0] < upper_target_bound:
+                target.append(room)
+
+            elif room[0] >= upper_target_bound:
+                safety.append(room)
+        else:
+            Exception('No rooms found :(')
+
+        return enemy_target_room, stretch, target, safety
 
     # Function to help a user find a room near a favorite location
     def get_rooms_near_location(self, converted_draw_number,
                                       favorite_location):
 
         # Get favorite_location latlon
-        self.query = """SELECT building, geo_lat, geo_long,
+        self.query = """SELECT building, geo_lat, geo_long
                    FROM buildings
-                   WHERE building = %s""" % (favorite_location)
+                   WHERE building = \'%s\'""" % (favorite_location)
         self.cursor.execute(self.query)
 
         location_list = self.cursor.fetchall()
 
         if location_list:
             favorite_location = location_list[0]
-            fav_location_lat = favorite_location[0]
-            fav_location_lon = favorite_location[1]
+            fav_location_lat = favorite_location[1]
+            fav_location_long = favorite_location[2]
         else:
             raise Exception('Something went wrong while determining your favorite location!')
 
         # Find room within 250m radius of favorite location
-        self.query = """SELECT building, room, occupancy, sub_free, quiet
+        self.query = """SELECT avg_draw_number, building, room, occupancy, sub_free, quiet
                    FROM rooms
                    LEFT JOIN buildings ON rooms.building_id = buildings.id
-                   WHERE acos(sin(geo_lat) + sin(%f) + cos(geo_lat)*cos(%f)*(cos(%f-geo_lon)))*6371000 < 250""" % (fav_location_lat, fav_location_lat, fav_location_lon)
+                   WHERE sqrt(power((geo_lat - %s),2) + power((geo_long - %s),2))*79208 < 250;""" % (fav_location_lat, fav_location_long)
+
         self.cursor.execute(self.query)
 
-        return self.cursor.fetchall()
+        results = self.cursor.fetchall()
+
+        # calculate span of user's target rooms
+        upper_target_bound = converted_draw_number + 30
+        lower_target_bound = converted_draw_number - 30
+
+        stretch = []
+        target = []
+        safety = []
+
+        # Sort rooms into categories of likeliness
+        for room in results:
+            if room[0] < lower_target_bound:
+                stretch.append(room)
+
+            elif room[0] >= lower_target_bound and room[0] < upper_target_bound:
+                target.append(room)
+
+            elif room[0] >= upper_target_bound:
+                safety.append(room)
+        else:
+            Exception('No rooms found :(')
+
+        return stretch, target, safety
 
     # General function to retrieve rooms within a given range of average draw numbers
     def get_rooms_in_range(self, lower, upper):

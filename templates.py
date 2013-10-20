@@ -13,7 +13,7 @@ class Templates():
         self.results_template = open('templates/results.html')
         self.error_page = open('templates/error.html')
 
-    def get_results_page(self, title, content):
+    def make_results_page(self, title, content):
         results_template = self.results_template.read()
 
         return results_template % (title, content)
@@ -21,25 +21,27 @@ class Templates():
     def get_start_page(self):
         return self.start_page.read()
 
-    def error_page(self):
+    def get_error_page(self):
         return self.error_page.read()
 
-    def make_table(list_of_tuples, headers = []):
-        print '<table class=".table">\n'
+    def make_table(self, list_of_tuples, headers = []):
+        generated_table = '<table class="results_table">\n'
 
         if headers:
-            print '  <tr class=".headers">\n'
+            generated_table += '  <tr class="headers">\n'
             for header in headers:
-                print '    <td class=".header">'+header+"</td>\n"
-            print "  </tr>\n"
+                generated_table += '    <td class="header">'+str(header)+"</td>\n"
+            generated_table += "  </tr>\n"
 
         for tuple in list_of_tuples:
-            print '  <tr class=".row">\n'
+            generated_table += '  <tr class="row">\n'
             for item in tuple:
-                print '    <td class=".cell">'+item+"</td>\n"
-            print "  </tr>\n"
+                generated_table += '    <td class="cell">'+str(item)+"</td>\n"
+            generated_table += "  </tr>\n"
 
-        print "</table>\n"
+        generated_table += "</table>\n"
+
+        return generated_table
 
 ''' Tests '''
 if __name__ == "__main__":
